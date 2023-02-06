@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const user = require("../models/user");
+
 const mongoose = require("mongoose");
 const fs = require('fs');
 const DIR = './';
