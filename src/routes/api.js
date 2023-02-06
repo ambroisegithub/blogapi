@@ -1,6 +1,6 @@
 // const Authorization = require("../middlewares/Middlewares");
 const express = require("express");
-const UserController = require("../controllers/UserController");
+const UserController = require("../controllers/userController");
 const fileUpload = require("../utils/fileUpload");
 const router = express.Router();
 

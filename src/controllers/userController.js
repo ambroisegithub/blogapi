@@ -1,8 +1,7 @@
-const User = require("../models/User");
+const User = require("../models/user1.js");
 
 const mongoose = require("mongoose");
 const fs = require('fs');
-const DIR = './';
 
 module.exports = class UserController {
 
