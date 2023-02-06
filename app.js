@@ -11,7 +11,7 @@ const multer = require("multer");
 app.use(bodyParser.json());
 
 require("dotenv").config();
-const PORT = process.env.port || 9999;
+const PORT = process.env.port || 3333;
 mongoose.set("strictQuery",false);
 //connect mongoDB
 mongoose
