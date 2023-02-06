@@ -1,4 +1,4 @@
-const Authorization = require("../middlewares/Middlewares");
+// const Authorization = require("../middlewares/Middlewares");
 const express = require("express");
 const UserController = require("../controllers/UserController");
 const fileUpload = require("../utils/fileUpload");
@@ -11,16 +11,16 @@ router.post(
   fileUpload("./storage/images"),
   UserController.createUser
 );
-router.get("/GetAll", Authorization, UserController.allUser);
-router.get("/singleblog/:id", Authorization, UserController.singleUser);
+router.get("/GetAll",UserController.allUser);
+router.get("/singleblog/:id", UserController.singleUser);
 router.post(
   "/updateBlog/:id",
-  Authorization,
+
 
   fileUpload("./storage/images"),
   UserController.updateUser
 );
-router.delete("/deleteBlog/:id", Authorization, UserController.deleteUser);
+router.delete("/deleteBlog/:id",UserController.deleteUser);
 
 // router.post("/comment/:id", UserController.commentBlogs);
 
