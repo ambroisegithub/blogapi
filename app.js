@@ -9,15 +9,47 @@ const mongoose = require('mongoose');
 const multer = require("multer");
 const cors = require("cors");
 // //swagger
-// const swaggerConfig = require("./swagger-config.json");
-
 
 const swaggerUi = require("swagger-ui-express");
-const swaggerjsDoc = require("swagger-jsdoc");
-const { graphqlHTTP } = require("express-graphql");
-const swaggerOption= require('./swagger');
-const jsDoc=swaggerjsDoc(swaggerOption)
-//  const Bcomment = require("./src/controllers/comments.js");
+const swaggerJsDoc = require("swagger-jsdoc");
+
+
+
+const options = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "My APIs documentation",
+      version: "1.0.0",
+      description: "This is my API documentation",
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          in: "header",
+          bearerformat: "JWT",
+        },
+      },
+    },
+    securit: [
+      {
+        bearerAuth: [],
+      },
+    ],
+    servers: [
+      {
+        url: "https://blogapi-0ew5.onrender.com",
+      },
+    ],
+  },
+apis: ["route/*.js", "module/*.js"],
+};
+const specs = swaggerJsDoc(options);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 //App use 
 app.use(bodyParser.json());
 
@@ -34,12 +66,12 @@ mongoose
   (useCreateIndex = true),
   // app.use(routes);
 app.listen(PORT, () => console.log(`listening on: ${PORT}`));
-//  app.use("/comment", Bcomment);
+
 
 app.use('/user', express.static('storage/images'))
 app.use(cors());
 //swagger app use
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(jsDoc));
+// app.use("/swagger", swaggerUi.serve, swaggerUi.setup(jsDoc));
 
 
 //Base Route
