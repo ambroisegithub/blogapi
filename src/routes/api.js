@@ -21,7 +21,4 @@ router.post(
   UserController.updateUser
 );
 router.delete("/deleteBlog/:id",UserController.deleteUser);
-
-// router.post("/comment/:id", UserController.commentBlogs);
-
 module.exports = router;

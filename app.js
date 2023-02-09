@@ -2,11 +2,22 @@
 const express = require('express');
 const router = require('./src/routes/api');
  const userRoutes = require("./src/routes/user");
+ const commentRoute   =  require("./src/routes/comment")
 const app = new express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require("multer");
-// const Bcomment = require("./src/controllers/comments.js");
+const cors = require("cors");
+// //swagger
+// const swaggerConfig = require("./swagger-config.json");
+
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerjsDoc = require("swagger-jsdoc");
+const { graphqlHTTP } = require("express-graphql");
+const swaggerOption= require('./swagger');
+const jsDoc=swaggerjsDoc(swaggerOption)
+//  const Bcomment = require("./src/controllers/comments.js");
 //App use 
 app.use(bodyParser.json());
 
@@ -23,12 +34,16 @@ mongoose
   (useCreateIndex = true),
   // app.use(routes);
 app.listen(PORT, () => console.log(`listening on: ${PORT}`));
-// app.use("/comment", Bcomment);
+//  app.use("/comment", Bcomment);
 
 app.use('/user', express.static('storage/images'))
+app.use(cors());
+//swagger app use
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(jsDoc));
 
 
 //Base Route
+app.use("/api/v1",commentRoute);
 app.use("/api/v1", router);
 app.use("/api", userRoutes);
 //Multer Error File Handling

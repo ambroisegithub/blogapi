@@ -1,28 +1,14 @@
 var Router = require("express");
 var router = Router();
-var Blog = require("../models/User1.js");
+var User = require("../models/user1.js");
 const mongoose = require("mongoose");
-router.post("/blogs/:blogId", async (req, res) => {
-  const blogId = req.params.blogId;
+router.post("/blogs/:id", async (req, res) => {
+  const id = req.params.id;
 
   try {
-    const blog = await Blog.findById(blogId);
-    if (!blog) {
-      return res.status(404).json({ message: "Blog not found" });
-    }
-
-    const comment = {
-      text: req.body.text,
-      author: req.body.author,
-    };
-
-    blog.comments.push(comment);
-    const savedBlog = await blog.save();
-
-    return res.status(201).json(savedBlog);
+    const blog = await User.findById(id);
   } catch (err) {
-    return res.status(500).json({ message:'THERE IS ERROR'});
-    // return res.status(500).json({ message: err.message });
+     return res.status(500).json({ message: err.message });
   }
 });
 module.exports=router
