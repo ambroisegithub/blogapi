@@ -2,12 +2,54 @@
 const express = require('express');
 const router = require('./src/routes/api');
  const userRoutes = require("./src/routes/user");
+ const commentRoute   =  require("./src/routes/comment")
 const app = new express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require("multer");
 const cors = require("cors");
-// const Bcomment = require("./src/controllers/comments.js");
+// //swagger
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+
+
+
+const options = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "My APIs documentation",
+      version: "1.0.0",
+      description: "This is my API documentation",
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          in: "header",
+          bearerformat: "JWT",
+        },
+      },
+    },
+    securit: [
+      {
+        bearerAuth: [],
+      },
+    ],
+    servers: [
+      {
+        url: "localhost:3333/api/v1",
+      },
+    ],
+  },
+apis: ["./src/routes/*.js", "./src/modules/*.js"],
+};
+const specs = swaggerJsDoc(options);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 //App use 
 app.use(bodyParser.json());
 
@@ -24,14 +66,16 @@ mongoose
   (useCreateIndex = true),
   // app.use(routes);
 app.listen(PORT, () => console.log(`listening on: ${PORT}`));
-// app.use("/comment", Bcomment);
+
 
 app.use('/user', express.static('storage/images'))
-
-
-//Base 
-
 app.use(cors());
+//swagger app use
+// app.use("/swagger", swaggerUi.serve, swaggerUi.setup(jsDoc));
+
+
+//Base Route
+app.use("/api/v1",commentRoute);
 app.use("/api/v1", router);
 app.use("/api", userRoutes);
 //Multer Error File Handling
