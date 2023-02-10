@@ -6,6 +6,7 @@ const app = new express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require("multer");
+const cors = require("cors");
 // const Bcomment = require("./src/controllers/comments.js");
 //App use 
 app.use(bodyParser.json());
@@ -28,7 +29,9 @@ app.listen(PORT, () => console.log(`listening on: ${PORT}`));
 app.use('/user', express.static('storage/images'))
 
 
-//Base Route
+//Base 
+
+app.use(cors());
 app.use("/api/v1", router);
 app.use("/api", userRoutes);
 //Multer Error File Handling
