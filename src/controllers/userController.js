@@ -54,7 +54,7 @@ module.exports = class UserController {
         title,
         discription,
         
-        imageUrl: `http://localhost:5000/user/${getImageName[1]}`,
+        imageUrl: `http://localhost:3333/user/${getImageName[1]}`,
       };
       return res.status(200).json({
         code: 200,
