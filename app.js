@@ -40,11 +40,11 @@ const options = {
     ],
     servers: [
       {
-        url: "localhost:3333/api/v1",
+        url: "https://blogapi-0ew5.onrender.com",
       },
     ],
   },
-apis: ["./src/routes/*.js", "./src/modules/*.js"],
+  apis: ["./src/routes/*.js", "./src/modules/*.js"],
 };
 const specs = swaggerJsDoc(options);
 
