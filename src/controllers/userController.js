@@ -44,7 +44,7 @@ module.exports = class UserController {
       console.log(req.params.id);
 
       const singleUserInfo = await User.findById(id);
-      const { name, title, discription, avater } = singleUserInfo;
+      const { name, title, description, avater } = singleUserInfo;
       var getImageName = avater.match(/\/([^\/?#]+)[^\/]*$/);
 
       //return console.log(getImageName);
