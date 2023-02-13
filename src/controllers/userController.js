@@ -52,7 +52,7 @@ module.exports = class UserController {
       const singleuUserData = {
         name,
         title,
-        discription,
+        description,
         
         imageUrl: `https://blogapi-0ew5.onrender.com/user/${getImageName[1]}`,
       };
