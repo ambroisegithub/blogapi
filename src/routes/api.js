@@ -2,25 +2,10 @@ const express = require("express");
 const UserController = require("../controllers/userController");
 const fileUpload = require("../utils/fileUpload");
 const router = express.Router();
+
 /**
  * @swagger
  * paths:
- *   /postBlog:
- *     post:
- *       tags:
- *         - User
- *       description: Creates a new user
- *       parameters:
- *         - in: formData
- *           name: image
- *           type: file
- *           required: true
- *           description: The image file to upload.
- *       responses:
- *         201:
- *           description: User created successfully
- *         400:
- *           description: Bad Request
  *   /api/v1/GetAll:
  *     get:
  *       tags:
@@ -72,7 +57,7 @@ const router = express.Router();
  *           description: User not found
  *         500:
  *           description: Internal server error
- *   /api/v1/deleteBlog/{id}:
+ *   /api//deleteBlog/{id}:
  *     delete:
  *       tags:
  *         - User
@@ -94,6 +79,50 @@ const router = express.Router();
 
 
 
+
+/**
+ * @swagger
+ * /api/v1/postBlog:
+ *  post:
+ *    description: Use to create a new post
+ *    tags: [Blog]
+ *    security:
+ *      - bearerAuth: []
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        multipart/form-data:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              avater:
+ *                type: string
+ *                format: binary
+ *                description: The photo of the post
+ *                required: true
+ *              title:
+ *                type: string
+ *                description: The title of the post
+ *                required: true
+ *              description:
+ *                type: string
+ *                description: The description of the post
+ *                required: true
+ *    responses:
+ *      200:
+ *        description: The newly created post
+ *        schema:
+ *          type: object
+ *          properties:
+ *            savePost:
+ *              type: object
+ *              description: The post data
+ *            status:
+ *              type: string
+ *              description: The status message
+ *      500:
+ *        description: Internal Server Error
+ */
 
 
 
